@@ -5,6 +5,7 @@
     <title>Facebook Demo</title>
     <meta charset="UTF-8">
 </head>
+
 <body>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
@@ -12,16 +13,31 @@
 
         function statusChangeCallback(response) {
             if (response.status === 'connected') {
-                $("#login").hide();
+                $("#loginBtn").hide();
+                $("#logoutBtn").show();
+
                 testAPI();
             }
             else {
-                $("#login").show();
+                $("#logoutBtn").hide();
+                $("#loginBtn").show();
             }
         }
 
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
+        //function checkLoginState() {
+        //    FB.getLoginStatus(function(response) {
+        //        statusChangeCallback(response);
+        //    });
+        //}
+
+        function LogIn() {
+            FB.login(function (response) {
+                statusChangeCallback(response);
+            }, { scope: 'public_profile,email' });
+        }
+
+        function LogOut() {
+            FB.logout(function (response) {
                 statusChangeCallback(response);
             });
         }
@@ -39,7 +55,7 @@
             });
         }
 
-        (function(d, s, id) {
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
@@ -55,10 +71,11 @@
 
     </script>
 
-    <div id="login">
-        <fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();">
-        </fb:login-button>
-    </div>
+    <button id="loginBtn" type="button" onclick="LogIn()">Log in</button>
+    <button id="logoutBtn" type="button" onclick="LogOut()">Log out</button>
+        
+    <!--<fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();">
+    </fb:login-button>-->
 
     <div id="content">
     </div>
