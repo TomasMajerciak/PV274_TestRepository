@@ -11,6 +11,11 @@
 
     <script>
 
+        $(document).ready(function () {
+            $("#auth").hide();
+            $("#content").hide();
+        });
+
         function statusChangeCallback(response) {
             if (response.status === 'connected') {
                 $("#loginBtn").hide();
@@ -31,7 +36,7 @@
         function LogIn() {
             FB.login(function (response) {
                 statusChangeCallback(response);
-            }, { scope: 'public_profile,email' });
+            }, { scope: 'public_profile,email,user_friends' });
         }
 
         function LogOut() {
@@ -70,10 +75,12 @@
 
     </script>
 
-    <button id="loginBtn" type="button" onclick="LogIn()">Log in</button>
-    <button id="logoutBtn" type="button" onclick="LogOut()">Log out</button>
+    <div id="auth">
+        <button id="loginBtn" type="button" onclick="LogIn()">Log in</button>
+        <button id="logoutBtn" type="button" onclick="LogOut()">Log out</button>
+    </div>
 
-    <br />
+    &nbsp;
 
     <div id="content">
         <table>
