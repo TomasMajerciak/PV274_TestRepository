@@ -21,14 +21,11 @@
             else {
                 $("#logoutBtn").hide();
                 $("#loginBtn").show();
+
+                $("#content").hide();
+                $(".data").text('');
             }
         }
-
-        //function checkLoginState() {
-        //    FB.getLoginStatus(function(response) {
-        //        statusChangeCallback(response);
-        //    });
-        //}
 
         function LogIn() {
             FB.login(function (response) {
@@ -65,7 +62,8 @@
 
         function testAPI() {
             FB.api('/me', function(response) {
-                $("#content").text(JSON.stringify(response));
+                $("#contentName").text(response.name);
+                $("#contentEmail").text(response.email);
             });
         }
 
@@ -73,11 +71,21 @@
 
     <button id="loginBtn" type="button" onclick="LogIn()">Log in</button>
     <button id="logoutBtn" type="button" onclick="LogOut()">Log out</button>
-        
-    <!--<fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();">
-    </fb:login-button>-->
+
+    <br />
 
     <div id="content">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td id="contentName" class="data"></td>
+            </tr>
+
+            <tr>
+                <td>E-mail:</td>
+                <td id="contentEmail" class="data"></td>
+            </tr>
+        </table>
     </div>
 
 </body>
