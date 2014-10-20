@@ -11,11 +11,6 @@
 
     <script>
 
-        $(document).ready(function () {
-            $("#auth").hide();
-            $("#content").hide();
-        });
-
         function statusChangeCallback(response) {
             if (response.status === 'connected') {
                 $("#loginBtn").hide();
@@ -80,7 +75,7 @@
         <button id="logoutBtn" type="button" onclick="LogOut()">Log out</button>
     </div>
 
-    &nbsp;
+    <br /> &nbsp; <br />
 
     <div id="content">
         <table>
